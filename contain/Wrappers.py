@@ -5,7 +5,7 @@ class ConditionSet:
     def __init__(self, ram, cpu, verbose):
         self.ram, self.cpu, self.verbose = self._cast(ram, cpu, verbose)
 
-    def _cast(ram, cpu, verbose):
+    def _cast(self, ram, cpu, verbose):
         """FIXME: Add error messages & handing for incorrect params"""
         return float(ram[:-2]), float(cpu[:-3]), (verbose == "True")
 
@@ -34,7 +34,7 @@ class LatencyInterval:
     def __init__(self, latency):
         self.latency = self._cast(latency)
 
-    def _cast(latency):
+    def _cast(self, latency):
         """FIXME: Add error messages & handing for incorrect params"""
         return int(latency[:-1])
 
