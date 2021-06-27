@@ -8,5 +8,7 @@ A lightweight and simple hardware virtualisation CLI for resource consumption ma
 ## Usage:
 ### Sample Call
 `python main.py --cmd="python scripts/empty.py"`
-### Help
+### Sample Call With Limits
+`python main.py --cmd="python scripts/empty.py" --cpu="1ghz" --ram="512mb"`
+### More Information
 `python main.py --help`
