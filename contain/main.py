@@ -3,6 +3,7 @@ import psutil
 import subprocess
 import os
 import signal
+import sys
 
 from Wrappers import ConditionSet, LatencyInterval
 
@@ -46,6 +47,12 @@ def run(cmd, cpu, ram, verbose, latency):
     pid = pro.pid
     cs = ConditionSet(ram, cpu, verbose)
 
+    if cs.verbose:
+        print(
+            "Setting signal.SIGINT to map to our internal sigterm() function call"
+        )
+
+    signal.signal(signal.SIGINT, lambda s, f: sigterm(pid))
     try:
         while True:
             p = psutil.Process(pid)

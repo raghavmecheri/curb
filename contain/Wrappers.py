@@ -7,7 +7,20 @@ class ConditionSet:
 
     def _cast(self, ram, cpu, verbose):
         """FIXME: Add error messages & handing for incorrect params"""
-        return float(ram[:-2]), float(cpu[:-3]), (verbose == "True")
+        ram, cpu, verbose = (
+            float(ram[:-2]),
+            float(cpu[:-3]),
+            (verbose == "True"),
+        )
+
+        if verbose:
+            print(
+                "ConditionSet initialized with RAM={} & CPU={}".format(
+                    ram, cpu
+                )
+            )
+
+        return ram, cpu, verbose
 
     def conditional_terminate(self, cpu, ram, sigterm):
         if cpu <= self.cpu and ram <= self.ram:

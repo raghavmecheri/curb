@@ -3,3 +3,6 @@ install:
 
 sample:
 	python contain/main.py --cmd="python scripts/empty.py" --verbose="True"
+
+heavy-sample:
+	python contain/main.py --cmd="python scripts/consumer.py" --cpu="1ghz" --ram="256mb" --verbose="True"
