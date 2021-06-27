@@ -5,7 +5,7 @@ import os
 import signal
 import sys
 
-from Wrappers import ConditionSet, LatencyInterval
+from Wrappers import ConditionSet, LatencyInterval, convert_unit
 
 
 def sigterm(pid, parent_exit=True):
@@ -23,8 +23,8 @@ def sigterm(pid, parent_exit=True):
 )
 @click.option(
     "--cpu",
-    default="1ghz",
-    help="CPU limit in ghz (default: '1ghz') - decimals work too!",
+    default="100%",
+    help="CPU limit in % (default: '100%') of a single core - decimals work too!",
 )
 @click.option(
     "--ram",
@@ -47,6 +47,11 @@ def run(cmd, cpu, ram, verbose, latency):
     pid = pro.pid
     cs = ConditionSet(ram, cpu, verbose)
 
+    def _get_datapoints(process):
+        cpu = process.cpu_percent()
+        ram = convert_unit(process.memory_info().rss, 3)
+        return cpu, ram
+
     if cs.verbose:
         print(
             "Setting signal.SIGINT to map to our internal sigterm() function call"
@@ -56,8 +61,7 @@ def run(cmd, cpu, ram, verbose, latency):
     try:
         while True:
             p = psutil.Process(pid)
-            stats = p.as_dict()
-            cpu, mem = stats["cpu_percent"], stats["memory_percent"]
+            cpu, mem = _get_datapoints(p)
             cs.conditional_terminate(cpu, mem, lambda: sigterm(pid))
             li.wait()
     except Exception as e:

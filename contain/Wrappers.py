@@ -1,4 +1,5 @@
 from time import sleep
+import enum
 
 
 class ConditionSet:
@@ -9,13 +10,13 @@ class ConditionSet:
         """FIXME: Add error messages & handing for incorrect params"""
         ram, cpu, verbose = (
             float(ram[:-2]),
-            float(cpu[:-3]),
+            float(cpu[:-1]),
             (verbose == "True"),
         )
 
         if verbose:
             print(
-                "ConditionSet initialized with RAM={} & CPU={}".format(
+                "ConditionSet initialized with RAM={}MB & CPU={}%".format(
                     ram, cpu
                 )
             )
@@ -26,7 +27,7 @@ class ConditionSet:
         if cpu <= self.cpu and ram <= self.ram:
             if self.verbose:
                 print(
-                    "Process continuing with CPU: {} & RAM: {}".format(
+                    "Process continuing with RAM: {}MB & CPU: {}%".format(
                         cpu, ram
                     )
                 )
@@ -53,3 +54,22 @@ class LatencyInterval:
 
     def wait(self):
         sleep(self.latency)
+
+
+def convert_unit(size_in_bytes, unit):
+    # Enum for size units
+    class SIZE_UNIT(enum.Enum):
+        BYTES = 1
+        KB = 2
+        MB = 3
+        GB = 4
+
+    """ Convert the size from bytes to other units like KB, MB or GB"""
+    if unit == SIZE_UNIT.KB:
+        return size_in_bytes / 1024
+    elif unit == SIZE_UNIT.MB:
+        return size_in_bytes / (1024 * 1024)
+    elif unit == SIZE_UNIT.GB:
+        return size_in_bytes / (1024 * 1024 * 1024)
+    else:
+        return size_in_bytes
