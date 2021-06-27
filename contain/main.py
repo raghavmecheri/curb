@@ -5,7 +5,7 @@ import os
 import signal
 import sys
 
-from Wrappers import ConditionSet, LatencyInterval, convert_unit
+from Wrappers import ConditionSet, LatencyInterval
 
 
 def sigterm(pid, parent_exit=True):
@@ -49,7 +49,16 @@ def run(cmd, cpu, ram, verbose, latency):
 
     def _get_datapoints(process):
         cpu = process.cpu_percent()
-        ram = convert_unit(process.memory_info().rss, 3)
+        ram_bytes = process.memory_info().rss
+        ram = ram_bytes * 1.0 / (1024 * 1024)
+
+        if cs.verbose:
+            print(
+                "Current Process CPU: {}% & RAM: {} bytes ({} MB)".format(
+                    cpu, ram_bytes, ram
+                )
+            )
+
         return cpu, ram
 
     if cs.verbose:
