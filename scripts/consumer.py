@@ -1,4 +1,4 @@
-# Empty (ish) script to test exec
+# Not empty script to test RAM overflow
 
 from time import sleep
 
