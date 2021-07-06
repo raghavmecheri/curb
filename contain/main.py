@@ -6,6 +6,7 @@ import signal
 import sys
 
 from Wrappers import ConditionSet, LatencyInterval
+from Utils import process_config
 
 
 def sigterm(pid, parent_exit=True):
@@ -32,6 +33,11 @@ def sigterm(pid, parent_exit=True):
     help="RAM limit in megabytes (default: '512mb') - decimals work too, but I'm not sure why you would do that to yourself.",
 )
 @click.option(
+    "--config",
+    default=None,
+    help='Path to a JSON config file that may/may not contain entries with the "ram" or "cpu" keys. If it does, then these values override the defaults/CLI args passed in.',
+)
+@click.option(
     "--verbose",
     default="False",
     help="Verbose setting, may be 'False' or 'True'",
@@ -41,10 +47,13 @@ def sigterm(pid, parent_exit=True):
     default="1s",
     help="The time-interval at which the passed command is monitored, in seconds (default: '1s'",
 )
-def run(cmd, cpu, ram, verbose, latency):
+def run(cmd, cpu, ram, config, verbose, latency):
     li = LatencyInterval(latency)
     pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
     pid = pro.pid
+    _cpu, _ram = process_config(config)
+    ram = _ram if _ram is not None else ram
+    cpu = _cpu if _cpu is not None else cpu
     cs = ConditionSet(ram, cpu, verbose)
 
     def _get_datapoints(process):
