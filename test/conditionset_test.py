@@ -2,7 +2,8 @@ import pytest
 import os
 import json
 
-from curb.utils import ConditionSet, LatencyInterval, process_config
+from curb.Wrappers import ConditionSet, LatencyInterval
+from curb.Config import process_config
 
 CASES = [
     {"lim_cpu": "100%", "lim_ram": "1mb", "cpu": 300.0, "ram": 0},

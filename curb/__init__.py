@@ -1,8 +1,5 @@
 from __future__ import absolute_import
 
-__version__ = "0.0.2"
-__test_version__ = "0.0.3"
-
 import click
 import psutil
 import subprocess
@@ -10,7 +7,8 @@ import os
 import signal
 import sys
 
-from . import utils
+from .Wrappers import ConditionSet, LatencyInterval
+from .Config import process_config
 
 
 def sigterm(pid, parent_exit=True):
@@ -52,13 +50,13 @@ def sigterm(pid, parent_exit=True):
     help="The time-interval at which the passed command is monitored, in seconds (default: '1s'",
 )
 def run(cmd, cpu, ram, config, verbose, latency):
-    li = utils.LatencyInterval(latency)
+    li = LatencyInterval(latency)
     pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
     pid = pro.pid
-    _cpu, _ram = utils.process_config(config)
+    _cpu, _ram = process_config(config)
     ram = _ram if _ram is not None else ram
     cpu = _cpu if _cpu is not None else cpu
-    cs = utils.ConditionSet(ram, cpu, verbose)
+    cs = ConditionSet(ram, cpu, verbose)
 
     def _get_datapoints(process):
         cpu = process.cpu_percent()

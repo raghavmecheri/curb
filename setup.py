@@ -1,10 +1,10 @@
-"""setup file for BetterLoader deployments
+"""setup file for curb deployments
 """
+__version__ = "0.0.2"
+__test_version__ = "0.0.4"
 
 from os import path, getenv
 from setuptools import setup
-
-from curb import __version__, __test_version__
 
 version = __test_version__ if getenv("TESTBUILD") == "True" else __version__
 
