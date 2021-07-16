@@ -1,4 +1,8 @@
 # Curb
+[![PyPi Badge](https://img.shields.io/pypi/dm/curb?style=for-the-badge)](https://pypi.org/project/curb/)
+[![PyPi Version](https://img.shields.io/pypi/v/curb?style=for-the-badge)](https://pypi.org/project/curb/)
+[![Github Actions Build Status](https://img.shields.io/github/workflow/status/raghavmecheri/curb/Build?style=for-the-badge)](https://img.shields.io/github/workflow/status/raghavmecheri/curb/Build?style=for-the-badge)
+
 A lightweight and simple hardware virtualisation CLI for resource consumption management.
 
 ## Use Cases:
