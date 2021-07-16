@@ -89,5 +89,4 @@ def run(cmd, cpu, ram, config, verbose, latency):
         )
 
 
-if __name__ == "__main__":
-    run()
+run()
