@@ -7,10 +7,16 @@ freeze:
 test: FORCE
 	python -m pytest
 
+build:
+	TESTBUILD="True" python -m build
+
+test-release:
+	TESTBUILD="True" twine upload --repository testpypi dist/*
+
 sample:
-	python contain --cmd="python scripts/empty.py" --verbose="True"
+	python curb --cmd="python scripts/empty.py" --verbose="True"
 
 heavy-sample:
-	python contain --cmd="python scripts/consumer.py" --cpu="100%" --ram="256mb" --verbose="True"
+	python curb --cmd="python scripts/consumer.py" --cpu="100%" --ram="256mb" --verbose="True"
 
 FORCE:

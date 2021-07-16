@@ -2,8 +2,8 @@ import pytest
 import os
 import json
 
-from contain.Wrappers import ConditionSet
-from contain.Utils import process_config
+from curb import ConditionSet
+from curb import process_config
 
 CASES = [
     {"lim_cpu": "100%", "lim_ram": "1mb", "cpu": 300.0, "ram": 0},

@@ -1,4 +1,4 @@
-# Contain
+# Curb
 A lightweight and simple hardware virtualisation CLI for resource consumption management.
 
 ## Use Cases:
@@ -7,8 +7,8 @@ A lightweight and simple hardware virtualisation CLI for resource consumption ma
 
 ## Usage:
 ### Sample Call
-`python main.py --cmd="python scripts/empty.py"`
+`python -m curb --cmd="python scripts/empty.py"`
 ### Sample Call With Limits
-`python main.py --cmd="python scripts/empty.py" --cpu="100%" --ram="512mb"`
+`python -m curb --cmd="python scripts/empty.py" --cpu="100%" --ram="512mb"`
 ### More Information
-`python main.py --help`
+`python -m curb --help`
