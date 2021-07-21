@@ -38,14 +38,18 @@ Call curb from the command line with a child process call as a parameter to laun
 ### Samples
 Launch a child process with the default hardware limitations that curb imposes (512 MB & 100% of a single CPU core):
 ```sh
-`python -m curb --cmd="python scripts/empty.py"`
+python -m curb --cmd="python scripts/empty.py"
 ```
 
 Launch a child process with custom hardware limitations and a defined latency (default=1s)
-`python -m curb --cmd="python scripts/empty.py" --cpu="80%" --ram="400mb" --latency="5s"`
+```sh
+python -m curb --cmd="python scripts/empty.py" --cpu="80%" --ram="400mb" --latency="5s"
+```
 
 Launch a sample call based on a JSON hardware definition
-`python -m curb --cmd="python scripts/empty.py" --config=".curbconfig.json" --latency="5s"`
+`ssh
+python -m curb --cmd="python scripts/empty.py" --config=".curbconfig.json" --latency="5s"
+`
 
 ### Expected Config Structure
 A `.curbconfig.json` file (an easy way to store your curb configuration) is expected to be of the format
