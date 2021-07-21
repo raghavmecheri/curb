@@ -13,7 +13,7 @@ CASES = [
 ]
 
 CONFIGS = [
-    {"path": "./scripts/mock_config.json", "expected": (None, "512MB")},
+    {"path": "./scripts/.curbconfig.json", "expected": (None, "512MB")},
     {"path": "./scripts/mock_bad_config.json", "expected": (None, None)},
     {"path": "randompathdoesnotexist", "expected": (None, None)},
 ]
