@@ -3,7 +3,7 @@
 <img src="https://raghavmecheri.me/curb.png" width="600px">
 
 
-**Resource containerization, quick and dirty**
+**Resource containerization made easy**
 
 ---
 
