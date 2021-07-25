@@ -19,4 +19,7 @@ sample:
 heavy-sample:
 	python -m curb --cmd="python scripts/consumer.py" --cpu="100%" --ram="256mb" --verbose="True"
 
+config-sample:
+	python -m curb --cmd="python scripts/empty.py" --config=".curbconfig.json" --verbose="True"
+
 FORCE:

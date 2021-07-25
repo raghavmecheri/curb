@@ -53,7 +53,7 @@ def run(cmd, cpu, ram, config, verbose, latency):
     li = LatencyInterval(latency)
     pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
     pid = pro.pid
-    _cpu, _ram = process_config(config)
+    _cpu, _ram = process_config(config, verbose)
     ram = _ram if _ram is not None else ram
     cpu = _cpu if _cpu is not None else cpu
     cs = ConditionSet(ram, cpu, verbose)

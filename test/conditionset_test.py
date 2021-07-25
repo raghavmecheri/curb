@@ -3,19 +3,12 @@ import os
 import json
 
 from curb.Wrappers import ConditionSet, LatencyInterval
-from curb.Config import process_config
 
 CASES = [
     {"lim_cpu": "100%", "lim_ram": "1mb", "cpu": 300.0, "ram": 0},
     {"lim_cpu": "100%", "lim_ram": "1mb", "cpu": 0.0, "ram": 3.0},
     {"lim_cpu": "100%", "lim_ram": "1mb", "cpu": 300.0, "ram": 3.0},
     {"lim_cpu": "100%", "lim_ram": "3mb", "cpu": 30.0, "ram": 0.0},
-]
-
-CONFIGS = [
-    {"path": "./scripts/.curbconfig.json", "expected": (None, "512MB")},
-    {"path": "./scripts/mock_bad_config.json", "expected": (None, None)},
-    {"path": "randompathdoesnotexist", "expected": (None, None)},
 ]
 
 
@@ -35,15 +28,6 @@ def _compute_expected_count(lim_cpu, lim_ram, cpu, ram):
     elif ram > lim_ram:
         return 1
     return 0
-
-
-@pytest.mark.parametrize("params", CONFIGS)
-def test_config_processing(params):
-    path, expected = params["path"], params["expected"]
-    cpu, ram = process_config(path)
-    e_cpu, e_ram = expected
-    assert cpu == e_cpu
-    assert ram == e_ram
 
 
 @pytest.mark.parametrize("params", CASES)
